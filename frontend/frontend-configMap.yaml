@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-configmap
+data:
+  BACKEND_IP: http://13.59.201.111/backend
+  FRONTEND_IP: 13.59.201.111
+  REDIRECT_URL:
+    https://api.intra.42.fr/oauth/authorize?client_id=u-s4t2ud-a2c38797979939f1a4da47d3fc33383b156e4789cbe713b94b800d6e615c3753&redirect_uri=http%3A%2F%2F13.59.201.111%2Fft_oauth_redirection&response_type=code
+

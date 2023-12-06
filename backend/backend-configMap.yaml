@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-configmap
+data:
+  POSTGRES_PASSWORD: "1234"
+  POSTGRES_USER: "backend"
+  POSTGRES_DB: "transcendence"
+  
+  REDIS_HOST: "redis-master"
+  REDIS_HOST_PASSWORD: "0ChVyA6NAq"
+
+  JWT_SECRET: "I_LOVE_42"
+  JWT_REFRESH_SECRET: "I_LOVE_42_42"
+  JWT_EXPIRES_IN: "30d"
+  JWT_REFRESH_EXPIRES_IN: "7d"
+    # file-like keys

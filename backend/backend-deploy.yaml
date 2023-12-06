@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: backend-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-test
+  template:
+    metadata:
+      labels:
+        app: backend-test
+    spec:
+      containers:
+        - name: backend
+          image: backend-image
+          ports:
+            - containerPort: 4242
+              name: backend-port
+          imagePullPolicy: Never
+          envFrom:
+            - configMapRef:
+                name: backend-configmap
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-svc
+spec:
+  selector:
+    app: backend-test
+  ports:
+  - name: backend-test-port
+    protocol: TCP
+    port: 80
+    targetPort: backend-port

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: frontend-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-test
+  template:
+    metadata:
+      labels:
+        app: frontend-test
+    spec:
+      containers:
+        - name: frontend
+          image: public.ecr.aws/z7u9m0d0/frontend-image:latest 
+          ports:
+            - containerPort: 3000
+              name: frontend-port
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: frontend-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-svc
+spec:
+  selector:
+    app: frontend-test
+  ports:
+  - name: frontend-test-port
+    protocol: TCP
+    port: 80
+    targetPort: frontend-port
